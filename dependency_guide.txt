@@ -1,0 +1,16 @@
+To get opencv to work:
+1) Download opencv from https://opencv.org/
+2) In the project, right click on the project name and click properties
+	a) In C/C++, add to "Additional Include Directories" (Path_To_Opencv)\opencv\build\include
+	b) In linker, add to "Additional Library Directories" (Path_To_Opencv)\opencv\build\x64\vc15\lib
+	c) In linker under the input section, 
+		Change the configuration to "Release" and add "opencv_world343.lib" to "Additional Dependecies"
+		Change the configuration to "Debug" and add "opencv_world343d.lib" to "Additional Dependecies"
+3) Click ok and within the project changed x86 to x64 
+
+To get winrt to work: (if it doesn't work by default)
+1) Click tools -> extensions and updates -> online -> search winrt 
+	download C++/WinRT
+2) Right click on the project name and click properties
+	Under C/C++ click the language section
+		use ISO C++ 17 Standard
