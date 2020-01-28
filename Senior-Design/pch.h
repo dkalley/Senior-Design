@@ -4,11 +4,18 @@
 #ifdef GetCurrentTime
 #undef GetCurrentTime
 #endif
+
+// winrt headers
+#include <winrt/base.h>
+#include <winrt/Windows.Devices.WiFiDirect.h>
+#include <winrt/Windows.Networking.Sockets.h>
 #include <winrt/Windows.Foundation.h>
-#include <winrt/Windows.Foundation.Collections.h>
-#include <winrt/Windows.System.h>
-#include <winrt/Windows.UI.Xaml.h>
-#include <winrt/Windows.UI.Xaml.Controls.h>
-#include <winrt/Windows.UI.Xaml.Hosting.h>
-#include <winrt/Windows.UI.Xaml.Media.h>
-#include <Windows.UI.Xaml.Hosting.DesktopWindowXamlSource.h>
+
+// Default C/C++ headers
+#include <iostream>
+#include <fstream>
+#include <thread>
+#include <string>
+#include <stdlib.h>
+#include <string.h>
+#include <tchar.h>
