@@ -21,6 +21,7 @@ void ObjectDetector::connect()
 	
 	/*client.addTuioListener(this);
 	client.connect();*/
+	
 }
 
 void ObjectDetector::disconnect()
