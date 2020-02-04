@@ -104,6 +104,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\opencv\opencv\build\include;C:\Users\theka\source\repos\Senior-Design\Senior-Design\include\;C:\Users\theka\source\repos\Senior-Design\Senior-Design\include\TUIO2\osc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ConformanceMode Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ConformanceMode>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -117,14 +118,18 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Bluetooth.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="ObjectDetector.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
+    <ClCompile Include="Bluetooth.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="ObjectDetector.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="WifiDirect.cpp" />
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="pch.cpp">
@@ -136,7 +141,9 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="PropertySheet.props" />
+    <None Include="PropertySheet.props">
+      <SubType>Designer</SubType>
+    </None>
     <Text Include="readme.txt">
       <DeploymentContent>false</DeploymentContent>
     </Text>
