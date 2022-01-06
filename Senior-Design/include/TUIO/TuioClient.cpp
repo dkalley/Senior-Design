@@ -79,7 +79,7 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
 			if (strcmp(cmd,"source")==0) {
 				const char* src;
 				args >> src;
-
+				
 				source_name = strtok((char*)src, "@");
 				char *addr = strtok(NULL, "@");
 				
@@ -692,7 +692,7 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
 				frameBlobs.clear();
 			}
 		}
-	} catch( osc::Exception &e ){
+	} catch( Exception& e ){
 		std::cerr << "error parsing TUIO message: "<< msg.AddressPattern() <<  " - " << e.what() << std::endl;
 	}
 }

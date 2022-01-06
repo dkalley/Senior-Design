@@ -1,93 +1,91 @@
 #include "pch.h"
 #include "ObjectDetector.h"
-#include "MyTuioListener.h"
 
-using namespace TUIO;
-
-void temp()
+void ObjectDetector::addTuioCursor(TuioCursor* tcur)
 {
+	// Create new object and store it
+	CCVObject newobject;
+	newobject.s_id = tcur->getCursorID();
+	newobject.ptx = (int)(tcur->getX() * 1280); 
+	newobject.pty = (int)(tcur->getY() * 720);
 
+	// Store object
+	Objects.insert(std::pair<int, CCVObject>(tcur->getCursorID(), newobject));
+
+	//Objects[tcur->getCursorID] = newobject;
+	// Add to list to proces
+	ToProcess.push_back(newobject);
+	return;
+}
+
+void ObjectDetector::updateTuioCursor(TuioCursor* tcur)
+{
+	int processflag = false;
+
+	// Get the object to update and update it
+	CCVObject objecttoupdate = Objects[tcur->getCursorID()];
+
+	// Determine if we should process. If movement is more than half a "square" away process that point
+	int ptx = (int)(tcur->getX() * 1280), pty = (int)(tcur->getY() * 720);
+	if (abs(ptx - objecttoupdate.ptx) > 21 || abs(pty - objecttoupdate.pty) > 16)
+		processflag = true;
+
+	objecttoupdate.s_id = tcur->getCursorID();
+	objecttoupdate.ptx = (int)(tcur->getX() * 1280);
+	objecttoupdate.pty = (int)(tcur->getY() * 720);
+
+	// Store updated object
+	Objects[tcur->getCursorID()] = objecttoupdate;
+
+	if (processflag)
+	{
+		// Add to list to proces movement
+		ToProcess.push_back(objecttoupdate);
+	}
+
+	return;
+}
+
+void ObjectDetector::removeTuioCursor(TuioCursor* tcur)
+{
+	// Remove the object from map
+	Objects.erase(tcur->getCursorID());
+	return;
 }
 
 
-// STILL NEED TO FIGURE OUT
-ObjectDetector::ObjectDetector()
-{
-	MyTuioListener *mylistener;
-	//receiver = new TcpReceiver(3333);
-}
 /*
-void ObjectDetector::StartClient()
-{
-	try
-	{
-		// Create the StreamSocket and establish a connection to the echo server.
-		//streamSocket = new Windows::Networking::Sockets::StreamSocket();
-		
-		// The server hostname that we will be establishing a connection to. In this example, the server and client are in the same process.
-		//auto hostName = ref new Windows::Networking::HostName(L"localhost");
-		
-		HostName hostname{ L"localhost" };
-
-		//this->clientListBox->Items->Append(L"client is trying to connect...");
-
-		create_task(streamSocket.ConnectAsync(hostname, L"3333")).then(
-			[=](Concurrency::task< void >)
-			{
-				//this->clientListBox->Items->Append(L"client connected");
-
-				// Send a request to the echo server.
-				DataWriter dataWriter(streamSocket.OutputStream());
-				auto request = new String(L"Hello, World!");
-				dataWriter.WriteUInt32(request->Length());
-				dataWriter.WriteString(request);
-
-				Concurrency::create_task(dataWriter.StoreAsync()).then(
-					[=](Concurrency::task< unsigned int >)
-					{
-						std::wstringstream wstringstream;
-						wstringstream << L"client sent the request: \"" << request->Data() << L"\"";
-						//this->clientListBox->Items->Append(ref new Platform::String(wstringstream.str().c_str()));
-
-						Concurrency::create_task(dataWriter.FlushAsync()).then(
-							[=](Concurrency::task< bool >)
-							{
-								dataWriter.DetachStream();
-
-								// Read data from the echo server.
-								DataReader dataReader(streamSocket.InputStream());
-								Concurrency::create_task(dataReader.LoadAsync(sizeof(unsigned int))).then(
-									[=](unsigned int bytesLoaded)
-									{
-										unsigned int stringLength = dataReader.ReadUInt32();
-										Concurrency::create_task(dataReader.LoadAsync(stringLength)).then(
-											[=](unsigned int bytesLoaded)
-											{
-												Platform::String^ response = dataReader.ReadString(bytesLoaded);
-												this->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler(
-													[=]
-													{
-														std::wstringstream wstringstream;
-														wstringstream << L"client received the response: \"" << response->Data() << L"\"";
-														//this->clientListBox->Items->Append(ref new Platform::String(wstringstream.str().c_str()));
-
-														streamSocket = {nullptr};
-														this->streamSocket = nullptr;
-
-														//this->clientListBox->Items->Append(L"client closed its socket");
-													}));
-											});
-									});
-							});
-					});
-			});
-	}
-	catch (Platform::Exception^ ex)
-	{
-		Windows::Networking::Sockets::SocketErrorStatus webErrorStatus = Windows::Networking::Sockets::SocketError::GetStatus(ex->HResult);
-		this->serverListBox->Items->Append(webErrorStatus.ToString() != L"Unknown" ? webErrorStatus.ToString() : ex->Message);
-	}
-}
-
+*	Functions NOT used in implementation below
 */
 
+
+void ObjectDetector::addTuioObject(TuioObject* tobj)
+{
+	return;
+}
+void ObjectDetector::updateTuioObject(TuioObject* tobj)
+{
+	return;
+}
+void ObjectDetector::removeTuioObject(TuioObject* tobj)
+{
+	return;
+}
+
+void ObjectDetector::addTuioBlob(TuioBlob* tblb)
+{
+	return;
+}
+void ObjectDetector::updateTuioBlob(TuioBlob* tblb)
+{
+	return;
+}
+void ObjectDetector::removeTuioBlob(TuioBlob* tblb)
+{
+	return;
+}
+
+void ObjectDetector::refresh(TuioTime frameTime)
+{
+	return;
+}

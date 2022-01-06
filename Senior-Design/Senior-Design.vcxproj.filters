@@ -7,7 +7,6 @@
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="ObjectDetector.cpp" />
-    <ClCompile Include="WifiDirect.cpp" />
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Bluetooth.cpp" />
@@ -19,9 +18,12 @@
     <ClInclude Include="ObjectDetector.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="WifiDirect.h" />
     <ClInclude Include="Bluetooth.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Dialog.h" />
+    <ClInclude Include="ProcessPoint.h" />
+    <ClInclude Include="Serial.h" />
+    <ClInclude Include="MyListener.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Senior_Design.rc" />
@@ -32,5 +34,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="png1.png" />
+    <Image Include="icon1.ico" />
   </ItemGroup>
 </Project>

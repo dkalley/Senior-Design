@@ -1,36 +1,51 @@
 #include "pch.h"
-#include "winrt/Windows.Foundation.Collections.h"
-#include "winrt/Windows.Networking.h"
-#include "winrt/Windows.Networking.Sockets.h"
-#include "winrt/Windows.Storage.Streams.h"
-//#include <amp.h>
+#include <windows.h>
+#include <string>
+#include <iostream>
+#include <vector>
+#include <list>
+#include <map>
 
+#include "TUIO/LibExport.h"
+#include "TUIO/TuioListener.h"
+#include "TUIO/TuioClient.h"
+#include "TUIO/UdpReceiver.h"
 
-//#include "TUIO/TcpReceiver.h"
+#pragma comment(lib, "libTUIO.lib")
 
-//using namespace concurrency;
-//using namespace platform;
-using namespace winrt::Windows::Storage::Streams;
-using namespace winrt::Windows::Networking;
-using namespace winrt::Windows::Networking::Sockets;
+using namespace TUIO;
+
+typedef struct _CCVObject {
+	int s_id;
+	int ptx;
+	int pty;
+} CCVObject, *LPCCVObject;
 
 #pragma once
-class ObjectDetector
+class ObjectDetector : public TuioListener
 {
 public:
-	ObjectDetector();
-	void StartClient();
-	//void connect();
-	//void disconnect();
-	
+	void addTuioObject(TuioObject* tobj);
+	void updateTuioObject(TuioObject* tobj);
+	void removeTuioObject(TuioObject* tobj);
 
-	StreamSocket streamSocket = { 0 };
+	void addTuioCursor(TuioCursor* tcur);
+	void updateTuioCursor(TuioCursor* tcur);
+	void removeTuioCursor(TuioCursor* tcur);
 
-	//HostName hostname;
-	//TuioClient *myclient;
-	//TcpReceiver *receiver;
+	void addTuioBlob(TuioBlob* tblb);
+	void updateTuioBlob(TuioBlob* tblb);
+	void removeTuioBlob(TuioBlob* tblb);
 
-	
+	void refresh(TuioTime frameTime);
+
+	BOOL dontprocess[768];
+
+	std::list<CCVObject> ToProcess;
+	std::map<int, CCVObject> Objects;
+
+	//std::vector<CCVObject> UnProcessedObjects;
+	//std::vector<CCVObject> ProcessedObjects;
 
 
 private:
